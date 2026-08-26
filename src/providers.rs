@@ -6,11 +6,11 @@ pub mod openai;
 pub mod ollama;
 
 pub trait ModelBackend {
-    fn generate(&self, config: &Config, prompt: &str) -> Result<String>;
+    fn generate(&self, config: &Config, prompt: &str, explain: bool) -> Result<(String, Option<String>)>;
 }
 
-pub const SYSTEM_PROMPT: &str = "You are a CLI tool that translates natural language to a shell command. 
-Only output the raw shell command, no explanation, no markdown formatting.";
+pub const SYSTEM_PROMPT: &str = "You are a CLI tool that translates natural language to a shell command.\nOnly output the raw shell command, no explanation, no markdown formatting.";
+pub const EXPLAIN_SYSTEM_PROMPT: &str = "You are a CLI tool that translates natural language to a shell command.\nOutput exactly two lines. First line: the raw shell command. Second line: a one-line plain-English explanation.";
 
 pub fn clean_command(cmd: &str) -> String {
     let mut cleaned = cmd.trim();

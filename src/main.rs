@@ -20,6 +20,8 @@ enum Commands {
     /// Generate a command from a prompt
     Gen {
         prompt: String,
+        #[arg(short, long)]
+        explain: bool,
     },
     /// Configuration commands
     Config {
@@ -60,11 +62,14 @@ fn main() -> anyhow::Result<()> {
     let cli = Cli::parse();
 
     match cli.command {
-        Commands::Gen { prompt } => {
+        Commands::Gen { prompt, explain } => {
             let config = config::load()?;
             let provider = get_provider(&config.provider)?;
-            let cmd = provider.generate(&config, &prompt)?;
+            let (cmd, expl) = provider.generate(&config, &prompt, explain)?;
             safety::check_command_safety(&cmd);
+            if let Some(e) = expl {
+                eprintln!("{}", e);
+            }
             print!("{}", cmd);
             
         }

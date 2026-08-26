@@ -1,4 +1,4 @@
-use super::{ModelBackend, SYSTEM_PROMPT, clean_command};
+use super::{ModelBackend, SYSTEM_PROMPT, EXPLAIN_SYSTEM_PROMPT, clean_command};
 use crate::config::Config;
 use crate::security::get_key;
 use anyhow::{anyhow, Result};
@@ -7,14 +7,14 @@ use serde_json::json;
 pub struct AnthropicProvider;
 
 impl ModelBackend for AnthropicProvider {
-    fn generate(&self, config: &Config, prompt: &str) -> Result<String> {
+    fn generate(&self, config: &Config, prompt: &str, explain: bool) -> Result<(String, Option<String>)> {
         let key = get_key("anthropic").map_err(|e| anyhow!("Missing Anthropic API key. Run `nlsh config set-key anthropic` to set it.\nDetails: {}", e))?;
         let client = reqwest::blocking::Client::new();
         
         let req_body = json!({
             "model": config.model,
             "max_tokens": 1024,
-            "system": SYSTEM_PROMPT,
+            "system": if explain { EXPLAIN_SYSTEM_PROMPT } else { SYSTEM_PROMPT },
             "messages": [
                 {"role": "user", "content": prompt}
             ]
@@ -33,6 +33,15 @@ impl ModelBackend for AnthropicProvider {
         let val: serde_json::Value = res.json()?;
         let content = val["content"][0]["text"].as_str().unwrap_or("").to_string();
         
-        Ok(clean_command(&content))
+        
+        if explain {
+            let mut lines = content.lines();
+            let cmd = lines.next().unwrap_or("").to_string();
+            let expl = lines.collect::<Vec<_>>().join(" ");
+            Ok((clean_command(&cmd), Some(expl)))
+        } else {
+            Ok((clean_command(&content), None))
+        }
+
     }
 }
