@@ -14,6 +14,6 @@ pub fn set_key(provider: &str, key: &str) -> anyhow::Result<()> {
 
 pub fn delete_key(provider: &str) -> anyhow::Result<()> {
     let entry = Entry::new("nlsh", provider)?;
-    entry.delete_password()?;
+    entry.delete_credential()?;
     Ok(())
 }

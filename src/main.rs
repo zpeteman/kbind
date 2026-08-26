@@ -3,7 +3,7 @@ mod providers;
 mod security;
 
 use clap::{Parser, Subcommand};
-use std::io::{self, Write};
+
 use providers::{ModelBackend, anthropic::AnthropicProvider, openai::OpenAiProvider, ollama::OllamaProvider};
 
 #[derive(Parser)]
