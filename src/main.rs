@@ -47,6 +47,10 @@ enum ConfigCommands {
     },
     /// Show current config
     Show,
+    /// Delete API key for a provider
+    DeleteKey {
+        provider: String,
+    },
 }
 
 fn get_provider(name: &str) -> anyhow::Result<Box<dyn ModelBackend>> {
@@ -99,6 +103,10 @@ fn main() -> anyhow::Result<()> {
                     if let Some(url) = &config.ollama_url {
                         println!("Ollama URL: {}", url);
                     }
+                }
+                ConfigCommands::DeleteKey { provider } => {
+                    security::delete_key(&provider)?;
+                    println!("Key deleted from OS keychain.");
                 }
             }
         }
