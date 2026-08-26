@@ -1,0 +1,43 @@
+name: Linux Packages
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-packages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-unknown-linux-gnu
+      
+      - name: Install nfpm
+        run: |
+          mkdir -p target/release
+          cp target/x86_64-unknown-linux-gnu/release/nlsh target/release/nlsh
+          wget https://github.com/goreleaser/nfpm/releases/download/v2.36.1/nfpm_2.36.1_Linux_x86_64.tar.gz
+          tar -xzf nfpm_2.36.1_Linux_x86_64.tar.gz nfpm
+          sudo mv nfpm /usr/local/bin/
+
+      - name: Build binary
+        run: cargo build --release --target x86_64-unknown-linux-gnu
+
+      - name: Create packages
+        run: |
+          mkdir -p target/release
+          cp target/x86_64-unknown-linux-gnu/release/nlsh target/release/nlsh
+          nfpm pkg --packager deb --target nlsh-amd64.deb
+          nfpm pkg --packager rpm --target nlsh-x86_64.rpm
+          nfpm pkg --packager archlinux --target nlsh-x86_64.pkg.tar.zst
+          
+      - name: Upload packages to Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: nlsh-*
+          file_glob: true
+          tag: ${{ github.ref }}
