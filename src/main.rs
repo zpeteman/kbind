@@ -1,6 +1,7 @@
 mod config;
 mod providers;
 mod security;
+mod safety;
 
 use clap::{Parser, Subcommand};
 
@@ -63,6 +64,7 @@ fn main() -> anyhow::Result<()> {
             let config = config::load()?;
             let provider = get_provider(&config.provider)?;
             let cmd = provider.generate(&config, &prompt)?;
+            safety::check_command_safety(&cmd);
             print!("{}", cmd);
             
         }
