@@ -14,3 +14,7 @@ dirs = "5.0"
 keyring = "3.0"
 toml = "0.8"
 rpassword = "7.3"
+
+[dev-dependencies]
+rexpect = "0.7.1"
+tempfile = "3.27.0"
