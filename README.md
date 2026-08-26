@@ -7,9 +7,9 @@ Natural language shell command generator.
 ### Installation
 
 Download the installer or package for your OS:
-- **Arch Linux**: Download `nlsh-x86_64.pkg.tar.zst` and install with `sudo pacman -U nlsh-x86_64.pkg.tar.zst`
-- **Debian/Ubuntu**: Download `nlsh-amd64.deb` and install with `sudo dpkg -i nlsh-amd64.deb`
-- **Fedora/RHEL**: Download `nlsh-x86_64.rpm` and install with `sudo rpm -i nlsh-x86_64.rpm`
+- **Arch Linux**: Download `nlsh.pkg.tar.zst` and install with `sudo pacman -U nlsh.pkg.tar.zst`
+- **Debian/Ubuntu**: Download `nlsh.deb` and install with `sudo dpkg -i nlsh.deb`
+- **Fedora/RHEL**: Download `nlsh.rpm` and install with `sudo rpm -i nlsh.rpm`
 - **macOS (Homebrew)**: Use the Homebrew formula generated in the release (or download the binary)
 - **Windows**: Use the `.zip` containing the binary and powershell install script
 
