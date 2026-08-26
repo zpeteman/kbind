@@ -64,15 +64,15 @@ fn main() -> anyhow::Result<()> {
             let provider = get_provider(&config.provider)?;
             let cmd = provider.generate(&config, &prompt)?;
             print!("{}", cmd);
-            io::stdout().flush()?;
+            
         }
         Commands::Config { cmd } => {
             match cmd {
                 ConfigCommands::SetKey { provider } => {
-                    print!("API key for {}: ", provider);
-                    io::stdout().flush()?;
-                    let mut key = String::new();
-                    io::stdin().read_line(&mut key)?;
+                    let key = rpassword::prompt_password(format!("API key for {}: ", provider)).unwrap();
+                    
+                    
+                    
                     let key = key.trim();
                     security::set_key(&provider, key)?;
                     println!("Key saved to OS keychain.");
