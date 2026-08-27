@@ -5,7 +5,7 @@ mod safety;
 
 use clap::{Parser, Subcommand};
 
-use providers::{ModelBackend, anthropic::AnthropicProvider, openai::OpenAiProvider, ollama::OllamaProvider};
+use providers::{ModelBackend, anthropic::AnthropicProvider, openai::OpenAiProvider, ollama::OllamaProvider, openrouter::OpenRouterProvider};
 
 #[derive(Parser)]
 #[command(name = "nlsh")]
@@ -58,6 +58,7 @@ fn get_provider(name: &str) -> anyhow::Result<Box<dyn ModelBackend>> {
         "anthropic" => Ok(Box::new(AnthropicProvider)),
         "openai" => Ok(Box::new(OpenAiProvider)),
         "ollama" => Ok(Box::new(OllamaProvider)),
+        "openrouter" => Ok(Box::new(OpenRouterProvider)),
         _ => Err(anyhow::anyhow!("Unknown provider: {}", name)),
     }
 }

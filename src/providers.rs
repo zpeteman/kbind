@@ -4,6 +4,7 @@ use anyhow::Result;
 pub mod anthropic;
 pub mod openai;
 pub mod ollama;
+pub mod openrouter;
 
 pub trait ModelBackend {
     fn generate(&self, config: &Config, prompt: &str, explain: bool) -> Result<(String, Option<String>)>;
