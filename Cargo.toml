@@ -2,10 +2,10 @@
 name = "nlsh"
 version = "0.1.0"
 edition = "2021"
-authors = ["USER <user@example.com>"]
+authors = ["zpeteman <user@example.com>"]
 description = "Natural language shell command generator"
 license = "MIT"
-repository = "https://github.com/USER/nlsh"
+repository = "https://github.com/zpeteman/nlsh"
 
 [dependencies]
 clap = { version = "4.5.4", features = ["derive"] }

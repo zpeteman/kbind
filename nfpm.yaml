@@ -4,10 +4,10 @@ platform: "linux"
 version: "0.1.0"
 section: "default"
 priority: "extra"
-maintainer: "USER <user@example.com>"
+maintainer: "zpeteman <user@example.com>"
 description: "Natural language shell command generator"
-vendor: "USER"
-homepage: "https://github.com/USER/nlsh"
+vendor: "zpeteman"
+homepage: "https://github.com/zpeteman/nlsh"
 license: "MIT"
 contents:
   - src: ./target/release/nlsh

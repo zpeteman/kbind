@@ -14,7 +14,7 @@ Download the installer or package for your OS:
 - **Windows**: Use the `.zip` containing the binary and powershell install script
 
 Or,
-Download the latest binary for your OS from the [Releases](https://github.com/USER/nlsh/releases) page.
+Download the latest binary for your OS from the [Releases](https://github.com/zpeteman/nlsh/releases) page.
 
 Alternatively, build from source:
 ```bash
