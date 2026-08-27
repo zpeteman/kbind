@@ -32,6 +32,8 @@ enum Commands {
     InstallShell {
         shell: String,
     },
+    /// Uninstall kbind and remove shell hooks
+    Uninstall,
 }
 
 #[derive(Subcommand)]
@@ -177,6 +179,48 @@ fn main() -> anyhow::Result<()> {
             }
             
             println!("Please restart your terminal or run: source {}", rc_file.display());
+        }
+        Commands::Uninstall => {
+            let config_dir = dirs::config_dir().unwrap_or_else(|| std::path::PathBuf::from(".")).join("kbind");
+            
+            // Remove from zshrc
+            let zshrc = dirs::home_dir().unwrap().join(".zshrc");
+            if let Ok(content) = std::fs::read_to_string(&zshrc) {
+                let new_content = content.lines().filter(|l| !l.contains("kbind/zsh.sh")).collect::<Vec<_>>().join("\n");
+                let _ = std::fs::write(&zshrc, new_content);
+                println!("Removed hook from ~/.zshrc");
+            }
+            
+            // Remove from bashrc
+            let bashrc = dirs::home_dir().unwrap().join(".bashrc");
+            if let Ok(content) = std::fs::read_to_string(&bashrc) {
+                let new_content = content.lines().filter(|l| !l.contains("kbind/bash.sh")).collect::<Vec<_>>().join("\n");
+                let _ = std::fs::write(&bashrc, new_content);
+                println!("Removed hook from ~/.bashrc");
+            }
+
+            // Remove from fish
+            let fishrc = dirs::config_dir().unwrap().join("fish").join("config.fish");
+            if let Ok(content) = std::fs::read_to_string(&fishrc) {
+                let new_content = content.lines().filter(|l| !l.contains("kbind/fish.fish")).collect::<Vec<_>>().join("\n");
+                let _ = std::fs::write(&fishrc, new_content);
+                println!("Removed hook from config.fish");
+            }
+
+            // Remove from powershell
+            let psrc = dirs::document_dir().unwrap().join("WindowsPowerShell").join("Microsoft.PowerShell_profile.ps1");
+            if let Ok(content) = std::fs::read_to_string(&psrc) {
+                let new_content = content.lines().filter(|l| !l.contains("kbind/powershell.ps1")).collect::<Vec<_>>().join("\n");
+                let _ = std::fs::write(&psrc, new_content);
+                println!("Removed hook from PowerShell profile");
+            }
+
+            // Delete config dir
+            let _ = std::fs::remove_dir_all(&config_dir);
+            println!("Deleted configuration files from {}", config_dir.display());
+
+            println!("\nSuccessfully uninstalled kbind hooks and configs!");
+            println!("To completely remove the executable, just delete the `kb` file from your cargo bin or /usr/bin folder.");
         }
     }
 
