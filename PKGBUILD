@@ -1,5 +1,5 @@
 pkgname=kbind-bin
-pkgver=0.1.0
+pkgver=1.0.0
 pkgrel=1
 pkgdesc="Natural language shell command generator"
 arch=('x86_64')
