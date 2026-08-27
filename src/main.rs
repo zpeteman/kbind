@@ -82,9 +82,11 @@ fn main() -> anyhow::Result<()> {
         Commands::Config { cmd } => {
             match cmd {
                 ConfigCommands::SetKey { provider } => {
-                    let key = rpassword::prompt_password(format!("API key for {}: ", provider)).unwrap();
-                    
-                    
+                    use std::io::Write;
+                    print!("API key for {}: ", provider);
+                    std::io::stdout().flush().unwrap();
+                    let mut key = String::new();
+                    std::io::stdin().read_line(&mut key).unwrap();
                     
                     let key = key.trim();
                     security::set_key(&provider, key)?;
