@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nlsh - Natural Language Shell</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0d1117; color: #c9d1d9; }
+        .terminal { background: #161b22; border: 1px solid #30363d; border-radius: 8px; }
+        .prompt { color: #58a6ff; }
+        .command { color: #7ee787; }
+        .comment { color: #8b949e; font-style: italic; }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col items-center py-16 px-4">
+
+    <div class="max-w-4xl w-full">
+        <!-- Header -->
+        <div class="text-center mb-16">
+            <h1 class="text-6xl font-bold text-white mb-4">nlsh</h1>
+            <p class="text-2xl text-gray-400 mb-8">Natural Language Shell Command Generator</p>
+            <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+                Type what you want to do in plain English, hit <kbd class="bg-gray-800 border border-gray-600 rounded px-2 py-1 text-sm font-mono">Ctrl+G</kbd>, and watch your terminal instantly write the exact shell command for you.
+            </p>
+            <div class="mt-8 flex justify-center gap-4">
+                <a href="https://github.com/zpeteman/nlsh" class="bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors">
+                    <i class="fab fa-github mr-2"></i>View on GitHub
+                </a>
+                <a href="#install" class="border border-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:border-gray-400 transition-colors">
+                    Install Now
+                </a>
+            </div>
+        </div>
+
+        <!-- Demo / Terminal Window -->
+        <div class="terminal p-6 mb-16 shadow-2xl font-mono text-sm leading-relaxed mx-auto max-w-3xl">
+            <div class="flex gap-2 mb-4 border-b border-gray-800 pb-4">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            
+            <div class="mb-4">
+                <span class="prompt">~ ❯</span> find all giant videos in my downloads folder
+                <span class="comment ml-2"># Press Ctrl+G...</span>
+            </div>
+            <div class="mb-6">
+                <span class="prompt">~ ❯</span> <span class="command">find ~/Downloads -type f -size +1G</span>
+            </div>
+
+            <div class="mb-4">
+                <span class="prompt">~ ❯</span> undo my last git commit but keep the files
+                <span class="comment ml-2"># Press Ctrl+G...</span>
+            </div>
+            <div>
+                <span class="prompt">~ ❯</span> <span class="command">git reset --soft HEAD~1</span>
+            </div>
+        </div>
+
+        <!-- Installation -->
+        <div id="install" class="mb-16">
+            <h2 class="text-3xl font-bold text-white mb-8 border-b border-gray-800 pb-2">Installation</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Mac / Linux -->
+                <div class="bg-[#161b22] p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-semibold text-white mb-4"><i class="fab fa-apple mr-2"></i>macOS & Linux</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Install via our automated script:</p>
+                    <div class="bg-black p-3 rounded font-mono text-sm overflow-x-auto text-gray-300">
+                        curl --proto '=https' --tlsv1.2 -LsSf https://github.com/zpeteman/nlsh/releases/latest/download/nlsh-installer.sh | sh
+                    </div>
+                </div>
+
+                <!-- Windows -->
+                <div class="bg-[#161b22] p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-semibold text-white mb-4"><i class="fab fa-windows mr-2"></i>Windows</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Install via PowerShell:</p>
+                    <div class="bg-black p-3 rounded font-mono text-sm overflow-x-auto text-gray-300">
+                        irm https://github.com/zpeteman/nlsh/releases/latest/download/nlsh-installer.ps1 | iex
+                    </div>
+                </div>
+
+                <!-- Debian -->
+                <div class="bg-[#161b22] p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-semibold text-white mb-4"><i class="fab fa-linux mr-2"></i>Debian / Ubuntu</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Download the .deb from GitHub Releases:</p>
+                    <div class="bg-black p-3 rounded font-mono text-sm overflow-x-auto text-gray-300">
+                        wget https://github.com/zpeteman/nlsh/releases/latest/download/nlsh.deb<br>
+                        sudo dpkg -i nlsh.deb
+                    </div>
+                </div>
+
+                <!-- Cargo -->
+                <div class="bg-[#161b22] p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-semibold text-white mb-4"><i class="fas fa-box-open mr-2"></i>Cargo (Rust)</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Build from source using Cargo:</p>
+                    <div class="bg-black p-3 rounded font-mono text-sm overflow-x-auto text-gray-300">
+                        cargo install --git https://github.com/zpeteman/nlsh
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup -->
+        <div class="mb-16">
+            <h2 class="text-3xl font-bold text-white mb-6 border-b border-gray-800 pb-2">Quick Setup</h2>
+            <div class="bg-[#161b22] p-6 rounded-lg border border-gray-800">
+                <ol class="list-decimal list-inside space-y-4 text-gray-300">
+                    <li>
+                        <strong>Install your shell hook:</strong>
+                        <div class="bg-black p-3 rounded font-mono text-sm mt-2 ml-4">nlsh install-shell zsh</div>
+                    </li>
+                    <li>
+                        <strong>Add your API key:</strong> (Supports Anthropic, OpenAI, OpenRouter, Gemini, or local Ollama)
+                        <div class="bg-black p-3 rounded font-mono text-sm mt-2 ml-4">nlsh config set-key openrouter</div>
+                    </li>
+                    <li>
+                        <strong>Restart your terminal</strong> and start typing!
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <footer class="text-center text-gray-500 text-sm border-t border-gray-800 pt-8 mt-16">
+            <p>Open Source (MIT) &bull; Built with Rust</p>
+        </footer>
+    </div>
+</body>
+</html>
