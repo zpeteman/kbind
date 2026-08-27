@@ -15,7 +15,6 @@ reqwest = { version = "0.12", features = ["blocking", "native-tls", "json"] }
 anyhow = "1.0"
 thiserror = "1.0"
 dirs = "5.0"
-keyring = "3.0"
 toml = "0.8"
 rpassword = "7.3"
 

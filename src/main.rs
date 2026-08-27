@@ -89,8 +89,9 @@ fn main() -> anyhow::Result<()> {
                     std::io::stdin().read_line(&mut key).unwrap();
                     
                     let key = key.trim();
-                    security::set_key(&provider, key)?;
-                    println!("Key saved to OS keychain.");
+                    println!("Saving key: {}, Provider: {:?}", key, provider); security::set_key(&provider, key)?;
+                    println!("Key saved to local config file.");
+println!("Retrieving from same entry: {:?}", keyring::Entry::new("nlsh", &provider).unwrap().get_password());
                 }
                 ConfigCommands::SetModel { provider, model } => {
                     let mut config = config::load()?;
@@ -110,7 +111,7 @@ fn main() -> anyhow::Result<()> {
                 }
                 ConfigCommands::DeleteKey { provider } => {
                     security::delete_key(&provider)?;
-                    println!("Key deleted from OS keychain.");
+                    println!("Key deleted from local config file.");
                 }
             }
         }
