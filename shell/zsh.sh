@@ -1,11 +1,11 @@
 #!/bin/zsh
-_nlsh_bind() {
+_kbind_bind() {
     local cmd
-    cmd=$(nlsh gen "$BUFFER")
+    cmd=$(kb gen "$BUFFER")
     if [ $? -eq 0 ]; then
         BUFFER="$cmd"
         CURSOR=${#BUFFER}
     fi
 }
-zle -N _nlsh_bind
-bindkey '^G' _nlsh_bind
+zle -N _kbind_bind
+bindkey '^G' _kbind_bind

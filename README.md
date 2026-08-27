@@ -1,4 +1,4 @@
-# nlsh
+# kbind
 
 Natural language shell command generator.
 
@@ -7,14 +7,14 @@ Natural language shell command generator.
 ### Installation
 
 Download the installer or package for your OS:
-- **Arch Linux**: Download `nlsh.pkg.tar.zst` and install with `sudo pacman -U nlsh.pkg.tar.zst`
-- **Debian/Ubuntu**: Download `nlsh.deb` and install with `sudo dpkg -i nlsh.deb`
-- **Fedora/RHEL**: Download `nlsh.rpm` and install with `sudo rpm -i nlsh.rpm`
+- **Arch Linux**: Download `kbind.pkg.tar.zst` and install with `sudo pacman -U kbind.pkg.tar.zst`
+- **Debian/Ubuntu**: Download `kbind.deb` and install with `sudo dpkg -i kbind.deb`
+- **Fedora/RHEL**: Download `kbind.rpm` and install with `sudo rpm -i kbind.rpm`
 - **macOS (Homebrew)**: Use the Homebrew formula generated in the release (or download the binary)
 - **Windows**: Use the `.zip` containing the binary and powershell install script
 
 Or,
-Download the latest binary for your OS from the [Releases](https://github.com/zpeteman/nlsh/releases) page.
+Download the latest binary for your OS from the [Releases](https://github.com/zpeteman/kbind/releases) page.
 
 Alternatively, build from source:
 ```bash
@@ -25,7 +25,7 @@ cargo install --path .
 
 ```bash
 # Set your API key
-nlsh config set-key anthropic
+kbind config set-key anthropic
 
 # Configure your shell
 # For bash, add this to your ~/.bashrc

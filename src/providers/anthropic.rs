@@ -8,7 +8,7 @@ pub struct AnthropicProvider;
 
 impl ModelBackend for AnthropicProvider {
     fn generate(&self, config: &Config, prompt: &str, explain: bool) -> Result<(String, Option<String>)> {
-        let key = get_key("anthropic").map_err(|e| anyhow!("Missing Anthropic API key. Run `nlsh config set-key anthropic` to set it.\nDetails: {}", e))?;
+        let key = get_key("anthropic").map_err(|e| anyhow!("Missing Anthropic API key. Run `kb config set-key anthropic` to set it.\nDetails: {}", e))?;
         let client = reqwest::blocking::Client::new();
         
         let req_body = json!({

@@ -8,7 +8,7 @@ use clap::{Parser, Subcommand};
 use providers::{ModelBackend, anthropic::AnthropicProvider, openai::OpenAiProvider, ollama::OllamaProvider, openrouter::OpenRouterProvider, gemini::GeminiProvider};
 
 #[derive(Parser)]
-#[command(name = "nlsh")]
+#[command(name = "kbind")]
 #[command(about = "Natural language shell command generator")]
 struct Cli {
     #[command(subcommand)]
@@ -116,7 +116,7 @@ fn main() -> anyhow::Result<()> {
         }
 
         Commands::InstallShell { shell } => {
-            let config_dir = dirs::config_dir().unwrap_or_else(|| std::path::PathBuf::from(".")).join("nlsh");
+            let config_dir = dirs::config_dir().unwrap_or_else(|| std::path::PathBuf::from(".")).join("kbind");
             std::fs::create_dir_all(&config_dir)?;
 
             let (script_name, script_content, rc_file, source_cmd) = match shell.to_lowercase().as_str() {

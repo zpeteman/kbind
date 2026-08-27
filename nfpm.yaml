@@ -1,4 +1,4 @@
-name: "nlsh"
+name: "kbind"
 arch: "amd64"
 platform: "linux"
 version: "0.1.0"
@@ -7,10 +7,10 @@ priority: "extra"
 maintainer: "zpeteman <user@example.com>"
 description: "Natural language shell command generator"
 vendor: "zpeteman"
-homepage: "https://github.com/zpeteman/nlsh"
+homepage: "https://github.com/zpeteman/kbind"
 license: "MIT"
 contents:
-  - src: ./target/release/nlsh
-    dst: /usr/bin/nlsh
+  - src: ./target/release/kb
+    dst: /usr/bin/kb
     file_info:
       mode: 0755

@@ -13,7 +13,7 @@ struct Keys {
 }
 
 fn keys_path() -> anyhow::Result<PathBuf> {
-    let config_dir = dirs::config_dir().unwrap_or_else(|| PathBuf::from(".")).join("nlsh");
+    let config_dir = dirs::config_dir().unwrap_or_else(|| PathBuf::from(".")).join("kbind");
     fs::create_dir_all(&config_dir)?;
     Ok(config_dir.join("keys.toml"))
 }

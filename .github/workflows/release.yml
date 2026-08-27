@@ -257,15 +257,15 @@ jobs:
 
       - name: Create packages
         run: |
-          cp target/x86_64-unknown-linux-gnu/release/nlsh target/release/nlsh
-          nfpm pkg --packager deb --target nlsh.deb
-          nfpm pkg --packager rpm --target nlsh.rpm
-          nfpm pkg --packager archlinux --target nlsh.pkg.tar.zst
+          cp target/x86_64-unknown-linux-gnu/release/kb target/release/kb
+          nfpm pkg --packager deb --target kbind.deb
+          nfpm pkg --packager rpm --target kbind.rpm
+          nfpm pkg --packager archlinux --target kbind.pkg.tar.zst
           mkdir -p distrib
-          mv nlsh.deb distrib/
-          mv nlsh.rpm distrib/
-          mv nlsh.pkg.tar.zst distrib/
-          mv target/cargo-aur/nlsh-*.tar.gz distrib/
+          mv kbind.deb distrib/
+          mv kbind.rpm distrib/
+          mv kbind.pkg.tar.zst distrib/
+          mv target/cargo-aur/kbind-*.tar.gz distrib/
 
       - name: "Upload artifacts to dist"
         uses: actions/upload-artifact@v7

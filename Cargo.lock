@@ -658,6 +658,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "kbind"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "dirs",
+ "reqwest",
+ "rexpect",
+ "rpassword",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "thiserror 1.0.69",
+ "toml",
+]
+
+[[package]]
 name = "libc"
 version = "0.2.189"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -740,23 +757,6 @@ dependencies = [
  "cfg-if",
  "cfg_aliases",
  "libc",
-]
-
-[[package]]
-name = "nlsh"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "clap",
- "dirs",
- "reqwest",
- "rexpect",
- "rpassword",
- "serde",
- "serde_json",
- "tempfile",
- "thiserror 1.0.69",
- "toml",
 ]
 
 [[package]]

@@ -20,7 +20,7 @@ impl Default for Config {
 
 pub fn config_path() -> PathBuf {
     let mut path = dirs::config_dir().unwrap_or_else(|| PathBuf::from("."));
-    path.push("nlsh");
+    path.push("kbind");
     path.push("config.toml");
     path
 }

@@ -8,7 +8,7 @@ pub struct GeminiProvider;
 
 impl ModelBackend for GeminiProvider {
     fn generate(&self, config: &Config, prompt: &str, explain: bool) -> Result<(String, Option<String>)> {
-        let key = get_key("gemini").map_err(|e| anyhow!("Missing Gemini API key. Run `nlsh config set-key gemini` to set it.\nDetails: {}", e))?;
+        let key = get_key("gemini").map_err(|e| anyhow!("Missing Gemini API key. Run `kb config set-key gemini` to set it.\nDetails: {}", e))?;
         let client = reqwest::blocking::Client::new();
         
         let system_text = if explain { EXPLAIN_SYSTEM_PROMPT } else { SYSTEM_PROMPT };

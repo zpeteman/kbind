@@ -8,7 +8,7 @@ pub struct OpenRouterProvider;
 
 impl ModelBackend for OpenRouterProvider {
     fn generate(&self, config: &Config, prompt: &str, explain: bool) -> Result<(String, Option<String>)> {
-        let key = get_key("openrouter").map_err(|e| anyhow!("Missing OpenRouter API key. Run `nlsh config set-key openrouter` to set it.\nDetails: {}", e))?;
+        let key = get_key("openrouter").map_err(|e| anyhow!("Missing OpenRouter API key. Run `kb config set-key openrouter` to set it.\nDetails: {}", e))?;
         let client = reqwest::blocking::Client::new();
         
         let req_body = json!({
@@ -22,8 +22,8 @@ impl ModelBackend for OpenRouterProvider {
         let res = client.post("https://openrouter.ai/api/v1/chat/completions")
             .header("Authorization", format!("Bearer {}", key))
             // OpenRouter recommends sending HTTP-Referer and X-Title for routing/display purposes
-            .header("HTTP-Referer", "https://github.com/zpeteman/nlsh")
-            .header("X-Title", "nlsh")
+            .header("HTTP-Referer", "https://github.com/zpeteman/kbind")
+            .header("X-Title", "kbind")
             .json(&req_body)
             .send()?;
             

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nlsh - Natural Language Shell</title>
+    <title>kbind - Natural Language Shell</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -19,13 +19,13 @@
     <div class="max-w-4xl w-full">
         <!-- Header -->
         <div class="text-center mb-16">
-            <h1 class="text-6xl font-bold text-white mb-4">nlsh</h1>
+            <h1 class="text-6xl font-bold text-white mb-4">kbind</h1>
             <p class="text-2xl text-gray-400 mb-8">Natural Language Shell Command Generator</p>
             <p class="text-lg text-gray-300 max-w-2xl mx-auto">
                 Type what you want to do in plain English, hit <kbd class="bg-gray-800 border border-gray-600 rounded px-2 py-1 text-sm font-mono">Ctrl+G</kbd>, and watch your terminal instantly write the exact shell command for you.
             </p>
             <div class="mt-8 flex justify-center gap-4">
-                <a href="https://github.com/zpeteman/nlsh" class="bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors">
+                <a href="https://github.com/zpeteman/kbind" class="bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors">
                     <i class="fab fa-github mr-2"></i>View on GitHub
                 </a>
                 <a href="#install" class="border border-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:border-gray-400 transition-colors">
@@ -69,7 +69,7 @@
                     <h3 class="text-xl font-semibold text-white mb-4"><i class="fab fa-apple mr-2"></i>macOS & Linux</h3>
                     <p class="text-gray-400 mb-4 text-sm">Install via our automated script:</p>
                     <div class="bg-black p-3 rounded font-mono text-sm overflow-x-auto text-gray-300">
-                        curl --proto '=https' --tlsv1.2 -LsSf https://github.com/zpeteman/nlsh/releases/latest/download/nlsh-installer.sh | sh
+                        curl --proto '=https' --tlsv1.2 -LsSf https://github.com/zpeteman/kbind/releases/latest/download/kbind-installer.sh | sh
                     </div>
                 </div>
 
@@ -78,7 +78,7 @@
                     <h3 class="text-xl font-semibold text-white mb-4"><i class="fab fa-windows mr-2"></i>Windows</h3>
                     <p class="text-gray-400 mb-4 text-sm">Install via PowerShell:</p>
                     <div class="bg-black p-3 rounded font-mono text-sm overflow-x-auto text-gray-300">
-                        irm https://github.com/zpeteman/nlsh/releases/latest/download/nlsh-installer.ps1 | iex
+                        irm https://github.com/zpeteman/kbind/releases/latest/download/kbind-installer.ps1 | iex
                     </div>
                 </div>
 
@@ -87,8 +87,8 @@
                     <h3 class="text-xl font-semibold text-white mb-4"><i class="fab fa-linux mr-2"></i>Debian / Ubuntu</h3>
                     <p class="text-gray-400 mb-4 text-sm">Download the .deb from GitHub Releases:</p>
                     <div class="bg-black p-3 rounded font-mono text-sm overflow-x-auto text-gray-300">
-                        wget https://github.com/zpeteman/nlsh/releases/latest/download/nlsh.deb<br>
-                        sudo dpkg -i nlsh.deb
+                        wget https://github.com/zpeteman/kbind/releases/latest/download/kbind.deb<br>
+                        sudo dpkg -i kbind.deb
                     </div>
                 </div>
 
@@ -97,7 +97,7 @@
                     <h3 class="text-xl font-semibold text-white mb-4"><i class="fas fa-box-open mr-2"></i>Cargo (Rust)</h3>
                     <p class="text-gray-400 mb-4 text-sm">Build from source using Cargo:</p>
                     <div class="bg-black p-3 rounded font-mono text-sm overflow-x-auto text-gray-300">
-                        cargo install --git https://github.com/zpeteman/nlsh
+                        cargo install --git https://github.com/zpeteman/kbind
                     </div>
                 </div>
             </div>
@@ -110,11 +110,11 @@
                 <ol class="list-decimal list-inside space-y-4 text-gray-300">
                     <li>
                         <strong>Install your shell hook:</strong>
-                        <div class="bg-black p-3 rounded font-mono text-sm mt-2 ml-4">nlsh install-shell zsh</div>
+                        <div class="bg-black p-3 rounded font-mono text-sm mt-2 ml-4">kb install-shell zsh</div>
                     </li>
                     <li>
                         <strong>Add your API key:</strong> (Supports Anthropic, OpenAI, OpenRouter, Gemini, or local Ollama)
-                        <div class="bg-black p-3 rounded font-mono text-sm mt-2 ml-4">nlsh config set-key openrouter</div>
+                        <div class="bg-black p-3 rounded font-mono text-sm mt-2 ml-4">kb config set-key openrouter</div>
                     </li>
                     <li>
                         <strong>Restart your terminal</strong> and start typing!

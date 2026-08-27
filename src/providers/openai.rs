@@ -8,7 +8,7 @@ pub struct OpenAiProvider;
 
 impl ModelBackend for OpenAiProvider {
     fn generate(&self, config: &Config, prompt: &str, explain: bool) -> Result<(String, Option<String>)> {
-        let key = get_key("openai").map_err(|e| anyhow!("Missing OpenAI API key. Run `nlsh config set-key openai` to set it.\nDetails: {}", e))?;
+        let key = get_key("openai").map_err(|e| anyhow!("Missing OpenAI API key. Run `kb config set-key openai` to set it.\nDetails: {}", e))?;
         let client = reqwest::blocking::Client::new();
         
         let req_body = json!({
