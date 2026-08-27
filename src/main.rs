@@ -112,8 +112,69 @@ fn main() -> anyhow::Result<()> {
                 }
             }
         }
+
         Commands::InstallShell { shell } => {
-            println!("Shell integration for {} not fully implemented in scaffold.", shell);
+            let config_dir = dirs::config_dir().unwrap_or_else(|| std::path::PathBuf::from(".")).join("nlsh");
+            std::fs::create_dir_all(&config_dir)?;
+
+            let (script_name, script_content, rc_file, source_cmd) = match shell.to_lowercase().as_str() {
+                "zsh" => (
+                    "zsh.sh",
+                    include_str!("../shell/zsh.sh"),
+                    dirs::home_dir().unwrap().join(".zshrc"),
+                    format!("\nsource {}
+", config_dir.join("zsh.sh").display())
+                ),
+                "bash" => (
+                    "bash.sh",
+                    include_str!("../shell/bash.sh"),
+                    dirs::home_dir().unwrap().join(".bashrc"),
+                    format!("\nsource {}
+", config_dir.join("bash.sh").display())
+                ),
+                "fish" => (
+                    "fish.fish",
+                    include_str!("../shell/fish.fish"),
+                    dirs::config_dir().unwrap().join("fish").join("config.fish"),
+                    format!("\nsource {}
+", config_dir.join("fish.fish").display())
+                ),
+                "powershell" => (
+                    "powershell.ps1",
+                    include_str!("../shell/powershell.ps1"),
+                    dirs::document_dir().unwrap().join("WindowsPowerShell").join("Microsoft.PowerShell_profile.ps1"),
+                    format!("\n. {}
+", config_dir.join("powershell.ps1").display())
+                ),
+                _ => {
+                    eprintln!("Unsupported shell: {}", shell);
+                    return Ok(());
+                }
+            };
+
+            let script_path = config_dir.join(script_name);
+            std::fs::write(&script_path, script_content)?;
+            
+            if let Ok(rc_content) = std::fs::read_to_string(&rc_file) {
+                if !rc_content.contains(&script_path.display().to_string()) {
+                    use std::io::Write;
+                    let mut file = std::fs::OpenOptions::new().append(true).create(true).open(&rc_file)?;
+                    file.write_all(source_cmd.as_bytes())?;
+                    println!("Successfully installed hook for {} into {}", shell, rc_file.display());
+                } else {
+                    println!("Hook for {} is already installed in {}", shell, rc_file.display());
+                }
+            } else {
+                use std::io::Write;
+                if let Some(parent) = rc_file.parent() {
+                    std::fs::create_dir_all(parent)?;
+                }
+                let mut file = std::fs::OpenOptions::new().append(true).create(true).open(&rc_file)?;
+                file.write_all(source_cmd.as_bytes())?;
+                println!("Created {} and installed hook for {}", rc_file.display(), shell);
+            }
+            
+            println!("Please restart your terminal or run: source {}", rc_file.display());
         }
     }
 
