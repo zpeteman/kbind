@@ -89,9 +89,8 @@ fn main() -> anyhow::Result<()> {
                     std::io::stdin().read_line(&mut key).unwrap();
                     
                     let key = key.trim();
-                    println!("Saving key: {}, Provider: {:?}", key, provider); security::set_key(&provider, key)?;
+                    security::set_key(&provider, key)?;
                     println!("Key saved to local config file.");
-println!("Retrieving from same entry: {:?}", keyring::Entry::new("nlsh", &provider).unwrap().get_password());
                 }
                 ConfigCommands::SetModel { provider, model } => {
                     let mut config = config::load()?;
